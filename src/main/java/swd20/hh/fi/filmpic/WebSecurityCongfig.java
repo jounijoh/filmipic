@@ -25,7 +25,7 @@ public class WebSecurityCongfig {
         	.antMatchers("/", "/css/**",
         			"/images/**",
         			"/createuser" ,
-        			"/h2/**").permitAll() // Enabled when logged out
+        			"/**").permitAll() // Enabled when logged out
         	.anyRequest().authenticated()
         	.and()
         	  .csrf().ignoringAntMatchers("/h2/**")
