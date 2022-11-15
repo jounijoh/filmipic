@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>All photographs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1 th:inline="text">Welcome to FilmPic,
+		[[${#httpServletRequest.remoteUser}]]!</h1>
+	<h1>All Photographs</h1>
+	<form th:action="@{/allphotos}">
+		Filter: <input type="text" name="keyword" id="keyword" size="50"
+			th:value="${keyword}" required /> &nbsp; <input type="submit"
+			value="Search" /> &nbsp; <input type="button" value="Clear"
+			id="btnClear" onclick="clearSearch()" />
+	</form>
+	<table class="table table-striped">
+		<tr>
+			<th>Image</th>
+			<th>Meta data</th>
+			<th>Film used</th>
+			<th>Camera used</th>
+
+		</tr>
+		<tr th:each="photo : ${photos}">
+			<td><a th:href="${photo.filePath}"><img
+					th:src="${photo.filePath}" style="height: 300px"></a></td>
+
+			<td><dl>
+					<dt>Title:</dt>
+					<dd th:text="${photo.title}"></dd>
+					<dt>Description:</dt>
+					<dd th:text="${photo.description}"></dd>
+					<dt>Photographer:</dt>
+					<dd
+						th:text="${photo.user != null} ? ${photo.user.firstname} : '(unknown)'"></dd>
+					<dd
+						th:text="${photo.user != null} ? ${photo.user.lastname} : '(unknown)'"></dd>
+				</dl></td>
+			<td>
+				<dl>
+					<dt>Name:</dt>
+					<dd th:text="${photo.film.name}"></dd>
+					<dt>Iso speed:</dt>
+					<dd th:text="${photo.film.isoSpeed}"></dd>
+					<dt>Type:</dt>
+					<dd th:text="${photo.film.type}"></dd>
+					<dt>Size</dt>
+					<dd th:text="${photo.film.size}"></dd>
+				</dl>
+			</td>
+			<td>
+				<dl>
+					<dt>Name:</dt>
+					<dd th:text="${photo.camera.name}"></dd>
+					<dt>Film format:</dt>
+					<dd th:text="${photo.camera.filmFormat}"></dd>
+				</dl>
+			</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/deletephoto/{id}(id=${photo.id})}"
+				class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/editphoto/{id}(id=${photo.id})}" class="btn btn-primary">Edit</a></td>
+		</tr>
+	</table>
+
+	<a href="/addphoto" class="btn btn-success">Add photograph</a>
+	<div style="clear: both; display: block; height: 10px;"></div>
+
+	<form th:action="@{/logout}" method="post">
+		<input class="btn btn-primary" type="submit" value="Sign Out" />
+	</form>
+	
+	<script type="text/javascript">
+		function clearSearch() {
+			window.location = "[[@{/allphotos}]]";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Add film</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>Add film</h1>
+
+		<form th:object="${film}" th:action="savefilm" action="#"
+			method="post">
+			<label for="name">Name</label> <input type="text" id="name"
+				th:field="*{name}" /><br /> <label for="isoSpeed">Iso speed</label>
+			<input type="text" id="isoSpeed" th:field="*{isoSpeed}" /><br /> <label
+				for="type">Type</label> <input type="text" id="type"
+				th:field="*{type}" /><br /> <label for="type">Size</label> <input
+				type="text" id="size" th:field="*{size}" /><br /> <input
+				type="submit" value="Save"></input>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>List of Cameras</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Cameras</h1>
+	<table class="table table-striped">
+		<tr>
+			
+			<th>Name</th>
+			<th>Film format</th>
+			
+		</tr>
+		<tr th:each="camera : ${cameras}">
+			
+			<td th:text="${camera.name}"></td>
+			<td th:text="${camera.filmFormat}"></td>
+			<td><a th:href="@{/deletecamera/{id}(id=${camera.id})}"
+				class="btn btn-danger">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/addcamera" class="btn btn-success">Add new camera</a>
+</body>
+</html>

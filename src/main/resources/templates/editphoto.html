@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Edit photograph</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Edit photograph</h1>
+		<div>
+			<form action="#" 
+				th:action="@{/update/{id}(id=${photo.id})}" 
+				th:object="${photo}"
+			 	method="post">
+				
+				<input type="hidden" id="id" th:field="*{id}"/>
+		<label for="filmlist">Film used</label> <select id="filmlist"
+				th:field="*{film}" class="form-control">
+				<option th:each="film: ${films}"
+					th:value="${film.filmId}" th:text="${film.name}"></option>
+			</select><p>If film used is not on the list, feel free to add a new film to the database here:  <a href="/addfilmforphoto" class="btn btn-light">Add</a></p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="cameralist">Camera used</label> <select id="cameralist"
+				th:field="*{camera}" class="form-control">
+				<option th:each="camera: ${cameras}"
+					th:value="${camera.id}" th:text="${camera.name}"></option>
+			</select><p>If camera used is not on the list, feel free to add a new camera to the database here:  <a href="/addcameraforphoto" class="btn btn-light">Add</a></p>
+				<label for="title">Title</label> <input type="text" id="title"
+				th:field="*{title}" /><br />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="description">Description</label> <input type="text" id="description"
+				th:field="*{description}" /><br />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="filePath">File name</label> <input type="text" id="filePath" placeholder="File name as written in folder"
+				th:field="*{filePath}" /><br />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			 <input type="submit" value="Save"></input>
+			</form>
+		</div>
+</body>
+</html>

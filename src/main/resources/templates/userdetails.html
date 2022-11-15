@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>User Details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1 th:inline="text">Hello,
+		[[${#httpServletRequest.remoteUser}]]!</h1>
+	<table class="table table-striped">
+		<tr>
+			
+			<th>First name</th>
+			<th>Last name</th>
+			
+		</tr>
+		<tr>
+			<td><span sec:authentication="name">Username</span></td>
+		</tr>
+		<!-- <tr th:object="${user}">
+			
+			<td th:text="${user.firstname}"></td>
+			<td th:text="${user.lastname}"></td>
+		
+		</tr> -->
+	</table>
+	<a href="/addcamera" class="btn btn-success">Add new camera</a>
+</body>
+</html>
